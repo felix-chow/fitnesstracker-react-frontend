@@ -3,10 +3,20 @@ import { useEffect, useState } from "react";
 import Home from "./components/home";
 import { fetchRoutines, fetchActivities, fetchRoutineActivity, fetchUser } from "./api";
 import Activities from "./components/activities";
-import AccountModal from "./components/modal/login";
+import AccountModal from "./components/modal/AccountModal";
 import Routines from "./components/routines";
 
 const App = () => {
+  // Login/Register Modal
+
+  const state = {
+    show: false
+  };
+  const showModal = e => {
+    this.setState({
+      show: true
+    })
+  }
   const [routines, setRoutines] = useState([]);
   const [activities, setActivities] = useState([]);
   const [routineActivities, setRoutineActivities] = useState([]);
@@ -68,7 +78,11 @@ const App = () => {
             {
               token ? <button onClick={logout}>Log out</button> :
                 <>
-                  <Link to="/users/login">Login</Link>
+                  <Link to="/users/login">
+                  <button onClick={e => {
+                    this.showModal();
+                  }}>Login</button></Link>
+                    
                   <Link to="/users/register">Register</Link>
                 </>
             }
