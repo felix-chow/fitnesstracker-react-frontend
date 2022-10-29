@@ -3,13 +3,8 @@ const baseURL = 'https://fitnesstrac-kr.herokuapp.com/api/';
 // Activities
 
 export const fetchActivities = async () => {
-    const result = await fetch(baseURL + "/activities", {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    const { data } = await result.json()
-    console.log("data: ", data);
+    const result = await fetch(baseURL + "/activities");
+    const data = await result.json()
     return data;
 };
 
@@ -25,7 +20,7 @@ export const createActivities = async (token, name, description) => {
             description,
         }),
     })
-    const { data } = await result.json()
+    const data = await result.json()
     console.log("data: ", data);
 };
 
@@ -41,17 +36,13 @@ export const updateActivities = async (token, name, description, activityId) => 
             description,
         }),
     })
-    const { data } = await result.json()
+    const data = await result.json()
     console.log("data: ", data);
 };
 
 export const fetchRoutineActivity = async (activityId) => {
-    const result = await fetch(baseURL + `/activities/${activityId}`, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    const { data } = await result.json()
+    const result = await fetch(baseURL + `/activities/${activityId}`);
+    const data = await result.json()
     console.log("data: ", data);
     return data;
 };
@@ -59,11 +50,7 @@ export const fetchRoutineActivity = async (activityId) => {
 // Routines
 
 export const fetchRoutines = async () => {
-    const result = await fetch(baseURL + "/routines", {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
+    const result = await fetch(baseURL + "/routines");
     const { data } = await result.json()
     console.log("data: ", data);
     return data;
