@@ -1,10 +1,7 @@
-// import { Link } from "react-router-dom";
-// import { useState } from "react";
-
-const Routines = ({ routines, setRoutines, setRoutineId }) => {
+const Routines = ({ routines, setRoutineId }) => {
 
     return (
-        <div>
+        <div class="routines">
             <h1>Routines</h1>
             {
                 routines.map((routine) => {
@@ -14,7 +11,6 @@ const Routines = ({ routines, setRoutines, setRoutineId }) => {
                                 <div className="card-body">
                                     <h3 className="card-title">{routine.name}</h3>
                                     <p className="card-text">{routine.goal}</p>
-                                    <p className="card-text">{routine.creatorName}</p>
                                     {
                                         routine.activities.map((activity) => {
                                             return (
@@ -24,8 +20,8 @@ const Routines = ({ routines, setRoutines, setRoutineId }) => {
                                             )
                                         })
                                     }
-                                    {/* <button type="button" className="btn btn-outline-primary" onClick={() => setPostId(post.id)}>Edit</button>
-                                <button type="button" className="btn btn-outline-danger" onClick={() => setPostId(post.id)}>Delete</button> */}
+                                    <button type="button" className="btn btn-outline-primary" onClick={() => setRoutineId(routine.id)}>Edit</button>
+                                <button type="button" className="btn btn-outline-danger" onClick={() => setRoutineId(routine.id)}>Delete</button>
                                 </div>
                             </div>
 
@@ -35,8 +31,6 @@ const Routines = ({ routines, setRoutines, setRoutineId }) => {
 
                 })
             }
-
-
         </div>
     )
 }

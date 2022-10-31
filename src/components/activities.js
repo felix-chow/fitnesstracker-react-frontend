@@ -1,9 +1,21 @@
-// import { Link } from "react-router-dom";
+// import { useEffect } from "react";
+import CreateActivityForm from "./CreateActivityForm";
 
-const Activities = ({ activities, setActivities, setActivityId }) => {
+const Activities = ({ token, activities, setActivities, setActivityId }) => {
+    // useEffect(() => {
+    //     const createActivities = async () => {
+    //         const activities = await createActivities();
+    //         setActivities(activities);
+    //         setActivityId(activityId);
+    //     }
+    //     createActivities();
+    // }, []);
+
+    console.log(activities);
     return (
         <div>
             <h1>Activities</h1>
+            { token && <CreateActivityForm token={token} activities={activities} setActivities={setActivities} />     }
             {
                 activities.map((activity) => (
                     <div key={activity.id}>
@@ -11,8 +23,6 @@ const Activities = ({ activities, setActivities, setActivityId }) => {
                             <div className="card-body">
                                 <h3 className="card-title">{activity.name}</h3>
                                 <p className="card-text">{activity.description}</p>
-                                {/* <button type="button" className="btn btn-outline-primary" onClick={() => setPostId(post.id)}>Edit</button>
-                                <button type="button" className="btn btn-outline-danger" onClick={() => setPostId(post.id)}>Delete</button> */}
                             </div>
                         </div>
                     </div>

@@ -151,39 +151,43 @@ export const deleteRoutineActivity = async (token, routineActivityIdToDelete) =>
 // Users
 
 export const register = async (username, password) => {
-    const result = await fetch(baseURL + "/users/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            user: {
+    try {
+        const result = await fetch(baseURL + "/users/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
                 username,
-                password,
-            }
-        }),
-    })
-
-    const { data } = await result.json()
-    return data;
+                password
+            }),
+        })
+    
+        const data = await result.json()
+        return data;
+    } catch (error) {
+        throw Error ("Password must be at least eight characters long")
+    }
 };
 
 export const login = async (username, password) => {
-    const result = await fetch(baseURL + "/users/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            user: {
+    try {
+        const result = await fetch(baseURL + "/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
                 username,
-                password,
-            }
-        }),
-    })
-
-    const { data } = await result.json()
-    return data;
+                password
+            }),
+        })
+    
+        const data = await result.json()
+        return data;
+    } catch (error) {
+        throw Error ("Invalid username or password");
+    }
 };
 
 export const fetchUser = async (token) => {
@@ -194,6 +198,6 @@ export const fetchUser = async (token) => {
         },
     })
 
-    const { data } = await result.json()
+    const data = await result.json()
     return data;
 };
