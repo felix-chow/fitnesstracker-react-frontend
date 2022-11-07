@@ -1,6 +1,3 @@
-// import { Link } from "react-router-dom";
-// import { useState } from "react";
-
 import CreateRoutineForm from "./CreateRoutineForm";
 
 const MyRoutines = ({ routines, setRoutines, setRoutineId }) => {

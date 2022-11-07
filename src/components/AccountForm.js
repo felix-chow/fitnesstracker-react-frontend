@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-import { login, register } from "../api";
+import { Authenticate } from "../api";
 
 const AccountForm = ({ setToken }) => {
     const { action } = useParams();
@@ -11,15 +11,15 @@ const AccountForm = ({ setToken }) => {
 
     const handleSubmit = async (e) => {
         try {
-            const authFunction = action === "login" ? login : register;
+            const path = action === "login" ? "/users/login" : "/users/register";
             e.preventDefault();
-            const { token } = await authFunction(username, password);
-            setToken(token);
+            const data = await Authenticate({path, method: "POST", body: {username, password}});
+            setToken(data.token);
             navigate("/");
-
         }
 
         catch (error) {
+            console.log(error);
             setError(error);
         }
     }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 const CreateRoutineForm = ({ routines, data, setRoutines }) => {
+    // Use states for name and goal
     const [name, setName] = useState([]);
     const [goal, setGoal] = useState([]);
 

@@ -47,7 +47,7 @@ export const fetchRoutineActivity = async (activityId) => {
     return data;
 };
 
-// Routines
+// // Routines
 
 export const fetchRoutines = async () => {
     const result = await fetch(baseURL + "/routines");
@@ -150,44 +150,28 @@ export const deleteRoutineActivity = async (token, routineActivityIdToDelete) =>
 
 // Users
 
-export const register = async (username, password) => {
-    try {
-        const result = await fetch(baseURL + "/users/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username,
-                password
-            }),
-        })
-    
-        const data = await result.json()
-        return data;
-    } catch (error) {
-        throw Error ("Password must be at least eight characters long")
-    }
-};
+export const Authenticate = async ({ method, path, token, body }) => {
+    const options = {
+        method: method ? method : "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
 
-export const login = async (username, password) => {
-    try {
-        const result = await fetch(baseURL + "/users/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username,
-                password
-            }),
-        })
-    
-        const data = await result.json()
-        return data;
-    } catch (error) {
-        throw Error ("Invalid username or password");
+    if (token) {
+        options.headers.Authorization = `Bearer ${token}`;
     }
+
+    if (body) {
+        options.body = JSON.stringify(body);
+    }
+
+    const result = await fetch(baseURL + path, options);
+    const data = await result.json();
+    if (data.error) {
+        throw data.error;
+    }
+    return data;
 };
 
 export const fetchUser = async (token) => {

@@ -1,7 +1,7 @@
 const Routines = ({ routines, setRoutineId }) => {
 
     return (
-        <div class="routines">
+        <div className="routines">
             <h1>Routines</h1>
             {
                 routines.map((routine) => {

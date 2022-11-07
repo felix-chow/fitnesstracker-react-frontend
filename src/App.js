@@ -1,7 +1,7 @@
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Home from "./components/home";
-import { fetchRoutines, fetchActivities, fetchRoutineActivity, fetchUser } from "./api";
+import { fetchRoutines, fetchActivities, fetchRoutineActivity, fetchUser, Authenticate } from "./api";
 import Activities from "./components/activities";
 import AccountForm from "./components/AccountForm";
 import Routines from "./components/routines";
@@ -34,13 +34,18 @@ const App = () => {
   }
 
   useEffect(() => {
+    fetchActivities();
+    fetchRoutines();
+  }, [token]);
+
+  useEffect(() => {
     if (token) {
-      const getUser = async () => {
-        const user = await fetchUser(token);
-        setUser(user);
-      }
-      getUser();
-    }
+          const fetchUser = async () => {
+            const user = await Authenticate({path: "/users/me", token});
+            setUser(user);
+          }
+          fetchUser();
+        }
   }, [token]);
 
   useEffect(() => {
@@ -136,7 +141,7 @@ const App = () => {
           </span>
           <div>
 
-            <Link className="text-secondary m-4 text-decoration-none" to="/routines"><button>Routines</button></Link>
+            <Link className="text-secondary text-decoration-none" to="/routines"><button>Routines</button></Link>
             <Link className="text-secondary m-4 text-decoration-none" to="/activities"><button>Activities</button></Link>
             {
               token ?
@@ -145,7 +150,7 @@ const App = () => {
                   <button className="text-secondary m-4 text-decoration-none" onClick={logout}>Log out</button>
                 </> :
                 <>
-                  <Link className="text-secondary m-4 text-decoration-none" to="/users/login"><button>Login</button></Link>
+                  <Link className="text-secondary text-decoration-none" to="/users/login"><button>Login</button></Link>
                   <Link className="text-secondary m-4 text-decoration-none" to="/users/register"><button>Register</button></Link>
                 </>
             }
